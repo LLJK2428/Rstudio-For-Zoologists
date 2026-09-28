@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapter 8 - Extended Application – Introduction to R</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Chapter 7.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-674e3cc0c687a3cc22528ff3730883a4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+
+<script src="site_libs/leaflet-binding-2.2.3/leaflet.js"></script>
+
+
+
+<link rel="stylesheet" href="styles.scss">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Chapter 8.html">Chapter 8 - Extended Application</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 1 - Welcome to R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 2 - The Basics of R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 3 - Graphs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 3b.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 3B - The ggplot Packages</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 4 - An introduction to statistics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 5 - Parametric Tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 6 - Non Parametric tests</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 7 - Practice Activities</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Chapter 8.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Chapter 8 - Extended Application</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#interactive-maps" id="toc-interactive-maps" class="nav-link active" data-scroll-target="#interactive-maps">Interactive Maps</a></li>
+  <li><a href="#random-walk-simulation" id="toc-random-walk-simulation" class="nav-link" data-scroll-target="#random-walk-simulation">Random Walk Simulation</a></li>
+  <li><a href="#population-changes" id="toc-population-changes" class="nav-link" data-scroll-target="#population-changes">Population changes</a></li>
+  <li><a href="#this-guide" id="toc-this-guide" class="nav-link" data-scroll-target="#this-guide">This Guide!!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapter 8 - Extended Application</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This chapter covers mini projects I completed in R throughout my Placement. This Chapter will be complex, and it may be hard to understand certain procedures. It will also contain processes that aren’t explored in this guide, but I will try my best to explain everything as best I can. :)</p>
+<p>There are warnings that pop up throughout this section as you open the page and scroll down, i could remove them but there is nothing wrong with my code from what i can see, so i thought it best to let you see examples of possible messages that could appear that don’t actually mean much or effect your results.</p>
+<section id="interactive-maps" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-maps">Interactive Maps</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Required packages
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li>leaflet</li>
+<li>sf</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>birds <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">species =</span> <span class="fu">c</span>(<span class="st">"Blackbird"</span>, <span class="st">"Blue Tit"</span>, <span class="st">"Woodpigeon"</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat =</span> <span class="fu">c</span>(<span class="fl">52.769</span>, <span class="fl">52.771</span>, <span class="fl">52.767</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lng =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">2.128</span>, <span class="sc">-</span><span class="fl">2.125</span>, <span class="sc">-</span><span class="fl">2.130</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(birds)<span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> <span class="sc">~</span>lng,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="sc">~</span>lat,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span>species</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-657d40db729b95c12c83" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-657d40db729b95c12c83">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[52.769,52.771,52.767],[-2.128,-2.125,-2.13],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Blackbird","Blue Tit","Woodpigeon"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[52.767,52.771],"lng":[-2.13,-2.125]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>If you already have a pre-designated shapefile, you can also import it into RStudio. Also, if you have a recording app such as Avenza or another recording app, you can import a CSV file from it into RStudio, and it can classify shapefiles or simply markers for animals.</p>
+<p>But RStudio can only work with shapefiles that use the OSGB spatial reference system, so check what your shapefile uses and convert it if needed.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>my_shape <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"shape.gpkg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `lcm_2024' from data source 
+  `C:\Users\Liam\OneDrive - Harper Adams University\Documents\Zoologist guide to R\shape.gpkg' 
+  using driver `GPKG'
+Simple feature collection with 70 features and 8 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 370196.5 ymin: 319342 xmax: 372263.3 ymax: 320909.6
+Projected CRS: OSGB36 / British National Grid</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>my_shape <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(my_shape, <span class="dv">4326</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This example file does not contain field names, but if you export from any software, you can edit the attribute column to add field names; once you assign values to each, you can add popups like the previous example to show information about each field. But for this example, we are just going to use a basic field boundary GeoPackage:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(my_shape) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="fl">0.5</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight =</span> <span class="dv">1</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-23a6ac238b820877d651" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-23a6ac238b820877d651">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addPolygons","args":[[[[{"lng":[-2.426709588345384,-2.425771015081662,-2.425723229685751,-2.427586003170438,-2.42810828257287,-2.426709588345384],"lat":[52.77514536143261,52.7747969929889,52.77469885727673,52.77416060124244,52.77480048253207,52.77514536143261]}]],[[{"lng":[-2.420586653203415,-2.422130359342786,-2.421998237468853,-2.424440064338716,-2.424943417647449,-2.424959182789697,-2.4249630894248,-2.424969993925214,-2.424902428750818,-2.424902624866176,-2.423799157071913,-2.423865093691105,-2.423002968573357,-2.422460891104505,-2.422458903980923,-2.420860405325172,-2.420546376602251,-2.420186294379379,-2.42018897129509,-2.420227501336921,-2.420586653203415],"lat":[52.77348583281844,52.77327585957944,52.77331932790058,52.77515086829587,52.77513141088808,52.77515075568908,52.77515675121754,52.77516934243916,52.77549926276573,52.77550721873267,52.775828727001,52.77608496379932,52.77621576080892,52.77573597995107,52.77573422058141,52.77461252978725,52.77441171836411,52.77395378053738,52.77395391847912,52.77395362282338,52.77348583281844]}]],[[{"lng":[-2.426720296482151,-2.426722956611975,-2.427403045269926,-2.427628133177205,-2.428873880980022,-2.429518373442419,-2.43199940983974,-2.432017313519455,-2.43209097091196,-2.432685331329355,-2.432458932380823,-2.427563647604187,-2.427586003170438,-2.425723229685751,-2.423500966380818,-2.42452602586852,-2.426089236671756,-2.426720614087187,-2.426720296482151],"lat":[52.77155036072881,52.77154864493538,52.77095036253812,52.77089849106513,52.77139248291516,52.77164804225441,52.77166434467991,52.7716644619384,52.77166494508036,52.77272222489747,52.77268841576344,52.77413317375361,52.77416060124244,52.77469885727673,52.77311835714283,52.77289561565269,52.77210611754212,52.7715507056831,52.77155036072881]}]],[[{"lng":[-2.426709588345384,-2.427076315838421,-2.426407989307919,-2.427224222803691,-2.427540311136142,-2.427515083480962,-2.426019119921531,-2.425928767229812,-2.426557447209016,-2.425742420937479,-2.423635424476808,-2.423339627000409,-2.423002968573357,-2.423865093691105,-2.423799157071913,-2.424902624866176,-2.424902428750818,-2.424969993925214,-2.4249630894248,-2.424959182789697,-2.424943417647449,-2.425045384822974,-2.425771015081662,-2.426709588345384],"lat":[52.77514536143261,52.77550520538309,52.77558474650057,52.77708657298032,52.77804510273792,52.77807739342821,52.77825217045281,52.77784914384571,52.77775537022049,52.77619393414306,52.77675155215285,52.77657234159366,52.77621576080892,52.77608496379932,52.775828727001,52.77550721873267,52.77549926276573,52.77516934243916,52.77515675121754,52.77515075568908,52.77513141088808,52.7751274684754,52.7747969929889,52.77514536143261]}]],[[{"lng":[-2.42722834240376,-2.427076315838421,-2.426709588345384,-2.42810828257287,-2.428530048339634,-2.42722834240376],"lat":[52.7756446020231,52.77550520538309,52.77514536143261,52.77480048253207,52.77531720802136,52.7756446020231]}]],[[{"lng":[-2.417024944881763,-2.417319654398952,-2.41962049897261,-2.419745229797177,-2.419671266959336,-2.417670642684066,-2.417545930506959,-2.417461878208267,-2.4174235929221,-2.417024944881763],"lat":[52.77567051978539,52.77515806269842,52.77483064306248,52.77707049241158,52.77813342179709,52.77803700470379,52.77794624206,52.77654690995965,52.77581543853407,52.77567051978539]}]],[[{"lng":[-2.436609615175569,-2.436750914418519,-2.435780179981388,-2.434877557448953,-2.435441925594715,-2.436567488312046,-2.436609615175569],"lat":[52.7742986613744,52.7746767316991,52.77527541312394,52.77467975135037,52.77426802518952,52.7742652961377,52.7742986613744]}]],[[{"lng":[-2.427224222803691,-2.426407989307919,-2.427076315838421,-2.42722834240376,-2.428162069752784,-2.427224222803691],"lat":[52.77708657298032,52.77558474650057,52.77550520538309,52.7756446020231,52.77692704152297,52.77708657298032]}]],[[{"lng":[-2.427262534792642,-2.426947581183389,-2.427791317024308,-2.428665527833695,-2.429067448616302,-2.429181975659263,-2.427269927325224,-2.427262534792642],"lat":[52.78261528815553,52.78229261845316,52.78183024610813,52.78126073857054,52.78148606836671,52.78163106014047,52.78261939492342,52.78261528815553]}]],[[{"lng":[-2.424943417647449,-2.424440064338716,-2.421998237468853,-2.422130359342786,-2.423500966380818,-2.425723229685751,-2.425771015081662,-2.425045384822974,-2.424943417647449],"lat":[52.77513141088808,52.77515086829587,52.77331932790058,52.77327585957944,52.77311835714283,52.77469885727673,52.7747969929889,52.7751274684754,52.77513141088808]}]],[[{"lng":[-2.434877557448953,-2.433826926937587,-2.433387112614275,-2.432685331329355,-2.43209097091196,-2.4349121950403,-2.436501369525322,-2.436615817540325,-2.436634080903062,-2.436673777875863,-2.436685238988489,-2.436693418060179,-2.436757441891186,-2.436770900365198,-2.436741782888537,-2.436473200560659,-2.436555555502885,-2.436567488312046,-2.435441925594715,-2.434877557448953],"lat":[52.77467975135037,52.77456610602793,52.7738944848689,52.77272222489747,52.77166494508036,52.77130210084296,52.77112083596585,52.7718189276251,52.77193032669314,52.77217246141927,52.77224236534436,52.77229224897435,52.77268275788956,52.77276484431447,52.7728859683975,52.77400317631957,52.77423212178093,52.7742652961377,52.77426802518952,52.77467975135037]}]],[[{"lng":[-2.426019119921531,-2.424986709502422,-2.424740871996419,-2.423635424476808,-2.425742420937479,-2.426557447209016,-2.425928767229812,-2.426019119921531],"lat":[52.77825217045281,52.77826274844851,52.77815284720938,52.77675155215285,52.77619393414306,52.77775537022049,52.77784914384571,52.77825217045281]}]],[[{"lng":[-2.422653693456936,-2.422653892182552,-2.42265404062866,-2.422100872372714,-2.421626187542788,-2.421148932803405,-2.420567042791791,-2.418518032967071,-2.417887780543183,-2.417401812144697,-2.417387247856647,-2.417330399365369,-2.417285213536698,-2.417363561330903,-2.417552517551067,-2.417545930506959,-2.417670642684066,-2.419671266959336,-2.422653693456936],"lat":[52.77828718448416,52.77828749840936,52.7782878242032,52.77859158511046,52.77856657573332,52.77854142884943,52.77851076572738,52.77831682870231,52.7783574368912,52.77864947460679,52.77864633367587,52.77862837753529,52.77860887008239,52.7784160845977,52.77805589876795,52.77794624206,52.77803700470379,52.77813342179709,52.77828718448416]}]],[[{"lng":[-2.425515489759283,-2.425269363068735,-2.425145656055934,-2.426226777209291,-2.426907811048723,-2.426717258089993,-2.425763440856552,-2.425515489759283],"lat":[52.78167321410244,52.78133970592474,52.78126187646754,52.78062827653985,52.78101705262456,52.78112858429428,52.78168684407336,52.78167321410244]}]],[[{"lng":[-2.430792013165761,-2.431803886240958,-2.431121175256275,-2.431117887465806,-2.430325976678988,-2.430088327667879,-2.429215752713236,-2.429595515717017,-2.429006454752039,-2.427898823481407,-2.428062393874104,-2.428842611201679,-2.430792013165761],"lat":[52.77773119933125,52.77877042426604,52.77877590272444,52.77922305585255,52.77964110197916,52.77973767157496,52.77956041245799,52.77935910929869,52.778915808732,52.7780865451117,52.77803054125111,52.7778942360882,52.77773119933125]}]],[[{"lng":[-2.431803886240958,-2.43209311980984,-2.432798483168656,-2.433005489830642,-2.432422740864772,-2.432292763992816,-2.431795683555383,-2.430783419663691,-2.430325976678988,-2.431117887465806,-2.431121175256275,-2.431803886240958],"lat":[52.77877042426604,52.77906299792382,52.77931096942348,52.77957495204251,52.77975695976667,52.77973690688062,52.77934257819349,52.77985165333143,52.77964110197916,52.77922305585255,52.77877590272444,52.77877042426604]}]],[[{"lng":[-2.426226777209291,-2.425145656055934,-2.425269363068735,-2.425077965306727,-2.424188677628592,-2.423195234383737,-2.422888575369589,-2.422884147664605,-2.422974831434686,-2.423017706882202,-2.423065203225001,-2.42306824467998,-2.4238739638138,-2.424332387761898,-2.424717926944439,-2.425325560995352,-2.42548597367384,-2.425006582780151,-2.425624618583151,-2.426267650228493,-2.426267762270275,-2.42628789092478,-2.426226777209291],"lat":[52.78062827653985,52.78126187646754,52.78133970592474,52.78144073636859,52.78100478596879,52.78031946515172,52.78009528514477,52.78009213751014,52.77996061047907,52.77992891675205,52.77993633000973,52.77993656547301,52.77922477548638,52.77953232041349,52.77931294319765,52.77953905267712,52.7797041126716,52.78012034068245,52.78058800860114,52.78051113043188,52.78051121722631,52.78053109900632,52.78062827653985]}]],[[{"lng":[-2.416684016500452,-2.41701676881495,-2.417461878208267,-2.417545930506959,-2.417552517551067,-2.416684016500452],"lat":[52.77801620393632,52.77653741899146,52.77654690995965,52.77794624206,52.77805589876795,52.77801620393632]}]],[[{"lng":[-2.422458903980923,-2.422458527131494,-2.422456261073356,-2.421550149901369,-2.421549924049594,-2.422090201180886,-2.422716160988547,-2.422817734969311,-2.419745229797177,-2.41962049897261,-2.417319654398952,-2.417264499911122,-2.416800446602679,-2.417462426901998,-2.417991652548341,-2.419264158316663,-2.419938217586549,-2.420186171019087,-2.420186294379379,-2.420546376602251,-2.420860405325172,-2.422458903980923],"lat":[52.77573422058141,52.77573464622933,52.77573653402421,52.77577558039615,52.77577598573045,52.7760823952897,52.77671632592192,52.77699355810547,52.77707049241158,52.77483064306248,52.77515806269842,52.77472703695969,52.77389441519226,52.77395679337461,52.77400665857117,52.7737684371095,52.77357367494108,52.77395359219432,52.77395378053738,52.77441171836411,52.77461252978725,52.77573422058141]}]],[[{"lng":[-2.422817734969311,-2.422949992534922,-2.42387696471446,-2.423637296161302,-2.42265507581175,-2.422653693456936,-2.419671266959336,-2.419745229797177,-2.422817734969311],"lat":[52.77699355810547,52.77699190431177,52.77809921428122,52.77823616562483,52.77828725596929,52.77828718448416,52.77813342179709,52.77707049241158,52.77699355810547]}]],[[{"lng":[-2.42234126625543,-2.420786735987425,-2.421056062495715,-2.421604258386728,-2.421608096931162,-2.421609057398766,-2.421767039354592,-2.423179260214842,-2.423017706882202,-2.422974831434686,-2.422884147664605,-2.422888575369589,-2.423195234383737,-2.42234126625543],"lat":[52.78089820136089,52.78006131567533,52.77973819525204,52.77930753240834,52.77931216816416,52.77931306819732,52.77920631625668,52.77980823614589,52.77992891675205,52.77996061047907,52.78009213751014,52.78009528514477,52.78031946515172,52.78089820136089]}]],[[{"lng":[-2.418607859033015,-2.418013156480994,-2.417987913764687,-2.417986068712846,-2.417218676371553,-2.417034838198613,-2.417023223037441,-2.417316205874618,-2.418588705618156,-2.419774125763551,-2.419775827755022,-2.419804762217731,-2.419839873769869,-2.419857337543064,-2.420100169567274,-2.420179046129796,-2.419785089115638,-2.419463971810354,-2.418797748039324,-2.418607859033015],"lat":[52.78236127574309,52.78228023811223,52.78204333800831,52.78165140595391,52.78096883411617,52.78079822962545,52.78078682586266,52.78029159575561,52.77963936142736,52.78001789274169,52.78001712799594,52.78000173251935,52.77997904171243,52.77996530225791,52.78012200232112,52.78015431811932,52.78039469285265,52.78116353155542,52.7821417993763,52.78236127574309]}]],[[{"lng":[-2.436044595002602,-2.435959621646794,-2.434222498917564,-2.434212589995991,-2.434172655673664,-2.43614524483516,-2.437719270073594,-2.437854186188681,-2.439631185394954,-2.439570110841802,-2.43702793739496,-2.436044595002602],"lat":[52.78277273195854,52.78276235577767,52.78131453656829,52.78128214208814,52.78115158989173,52.78045871701244,52.77981007335438,52.77964777290246,52.78106567569397,52.78113445475117,52.78211404250973,52.78277273195854]}]],[[{"lng":[-2.418797748039324,-2.419463971810354,-2.420369239192981,-2.4193771763803,-2.418797748039324],"lat":[52.7821417993763,52.78116353155542,52.78173557429223,52.7821910820278,52.7821417993763]}]],[[{"lng":[-2.425269363068735,-2.425515489759283,-2.425649383588576,-2.426013265552363,-2.426123612461005,-2.425750373596258,-2.425498178198704,-2.424963013094179,-2.423308773009687,-2.42234126625543,-2.423195234383737,-2.424188677628592,-2.425077965306727,-2.425269363068735],"lat":[52.78133970592474,52.78167321410244,52.78174705659156,52.78194773552089,52.78201848515329,52.78226424387223,52.78245865117201,52.78229713994163,52.78147754500364,52.78089820136089,52.78031946515172,52.78100478596879,52.78144073636859,52.78133970592474]}]],[[{"lng":[-2.427029227496547,-2.427011410319089,-2.424829608375156,-2.423111999751875,-2.421770163338028,-2.421477087900262,-2.418998073396403,-2.418906630598209,-2.418397026633006,-2.419212964317903,-2.419344723920651,-2.422016462172091,-2.422098417664745,-2.42265681537071,-2.424778450908669,-2.42491131947348,-2.427167885393768,-2.427175795452958,-2.42731297203327,-2.427306943816637,-2.427112653145288,-2.42707864953448,-2.427078157124329,-2.42704155897446,-2.427029227496547],"lat":[52.78469364121205,52.78469215197238,52.7845975969901,52.78492637291547,52.78396090985303,52.78418039812149,52.7844585101254,52.78440726008986,52.78298570376101,52.78276780356397,52.78293265571265,52.78251256073573,52.78249967377344,52.78254090849135,52.78350150345257,52.78397549642794,52.78372843348948,52.78373222825758,52.7837980428392,52.78381591782889,52.78439197837493,52.78450988025099,52.78451167993452,52.78463778962083,52.78469364121205]}]],[[{"lng":[-2.436801475908301,-2.434249202792178,-2.434116292108216,-2.433222929676958,-2.434362221380048,-2.435678927261686,-2.435959621646794,-2.436044595002602,-2.437421315001369,-2.436801475908301],"lat":[52.78376455194509,52.78496684017628,52.7849194429903,52.78428861410452,52.78379499644218,52.78306407930035,52.78276235577767,52.78277273195854,52.78330065314308,52.78376455194509]}]],[[{"lng":[-2.417401812144697,-2.417225702706521,-2.417249157658527,-2.417081329848843,-2.417316205874618,-2.417023223037441,-2.416504590966356,-2.416475349159196,-2.416291223503546,-2.416234019070424,-2.415466856417217,-2.416297836785248,-2.416298034119547,-2.416364914951734,-2.417011366370841,-2.417363561330903,-2.417285213536698,-2.417330399365369,-2.417387247856647,-2.417401812144697],"lat":[52.77864947460679,52.77875530375493,52.77906644446373,52.7793351045947,52.78029159575561,52.78078682586266,52.78043685827507,52.78041712640932,52.78029287824713,52.78025427650469,52.77973658261487,52.77882413111227,52.77882399288098,52.77877695569089,52.77832230847002,52.7784160845977,52.77860887008239,52.77862837753529,52.77864633367587,52.77864947460679]}]],[[{"lng":[-2.427515083480962,-2.427691411825397,-2.427493364260303,-2.426538504956662,-2.42604331968886,-2.426028253424953,-2.425084255849574,-2.424946854380261,-2.424976784004874,-2.425014066999219,-2.425039392983062,-2.425046699745135,-2.424986709502422,-2.426019119921531,-2.427515083480962],"lat":[52.77807739342821,52.77810899598732,52.77913226187414,52.77942926722405,52.77922881625287,52.77906165004779,52.77854453730639,52.77849421624472,52.77848067497497,52.77845956239638,52.7784421658053,52.77843604738427,52.77826274844851,52.77825217045281,52.77807739342821]}]],[[{"lng":[-2.430549317025665,-2.430197229580382,-2.429804019385003,-2.430088327667879,-2.430325976678988,-2.430783419663691,-2.431795683555383,-2.432292763992816,-2.432374615875261,-2.430858406231991,-2.430549317025665],"lat":[52.7800929834518,52.78030286057568,52.78002685847449,52.77973767157496,52.77964110197916,52.77985165333143,52.77934257819349,52.77973690688062,52.77982248940898,52.77990873434583,52.7800929834518]}]],[[{"lng":[-2.426123612461005,-2.426374478358365,-2.427364488483744,-2.426940354961367,-2.426944494345667,-2.426963090401514,-2.426984415320106,-2.427008322147568,-2.427009407935756,-2.427514628839262,-2.427791317024308,-2.426947581183389,-2.427262534792642,-2.426856607251175,-2.425750373596258,-2.426123612461005],"lat":[52.78201848515329,52.78216894250524,52.78157185455241,52.78124856957597,52.78124297305095,52.78122255732062,52.78120314758169,52.78118487740797,52.78118417680387,52.78128031038647,52.78183024610813,52.78229261845316,52.78261528815553,52.78276795443752,52.78226424387223,52.78201848515329]}]],[[{"lng":[-2.427791317024308,-2.427514628839262,-2.428396317458201,-2.428968851543197,-2.429271353194516,-2.429067448616302,-2.428665527833695,-2.427791317024308],"lat":[52.78183024610813,52.78128031038647,52.78078018984012,52.78106732974644,52.78136485497048,52.78148606836671,52.78126073857054,52.78183024610813]}]],[[{"lng":[-2.42548597367384,-2.426557890503373,-2.426303115665017,-2.426267650228493,-2.425624618583151,-2.425006582780151,-2.42548597367384],"lat":[52.7797041126716,52.78036171398585,52.78050689021505,52.78051113043188,52.78058800860114,52.78012034068245,52.7797041126716]}]],[[{"lng":[-2.417287741086935,-2.417274186818587,-2.417274176277056,-2.41730091682527,-2.417197479200585,-2.418397026633006,-2.418906630598209,-2.418787517799333,-2.418071004726909,-2.417318427570769,-2.41729053472602,-2.417287741086935],"lat":[52.78338336313765,52.78336074995293,52.7833607329124,52.78335713648175,52.78320020743359,52.78298570376101,52.78440726008986,52.78444484901662,52.78452542811857,52.7833837037317,52.78338324453585,52.78338336313765]}]],[[{"lng":[-2.419857337543064,-2.419658896773673,-2.420075209323624,-2.420075915417812,-2.420567042791791,-2.421148932803405,-2.421626187542788,-2.422100872372714,-2.422310763231426,-2.421604258386728,-2.421056062495715,-2.420786735987425,-2.420179046129796,-2.420100169567274,-2.419857337543064],"lat":[52.77996530225791,52.77983724716954,52.77922917256047,52.77922813985331,52.77851076572738,52.77854142884943,52.77856657573332,52.77859158511046,52.77875248639499,52.77930753240834,52.77973819525204,52.78006131567533,52.78015431811932,52.78012200232112,52.77996530225791]}]],[[{"lng":[-2.416856054690663,-2.41668864775074,-2.417818365840795,-2.417026585505075,-2.416028330980124,-2.41658124973576,-2.416591870766853,-2.416641349979207,-2.416689208664454,-2.416734870404341,-2.416777783573744,-2.416807850230429,-2.416835873003914,-2.416856054690663],"lat":[52.78131803059651,52.78147923724799,52.78203576130496,52.78238437677513,52.781745668973,52.78122520460853,52.78122612828263,52.78123342477252,52.78124396947208,52.78125763585944,52.78127425776569,52.78128854437469,52.78130428458206,52.78131803059651]}]],[[{"lng":[-2.426123612461005,-2.426013265552363,-2.425649383588576,-2.425515489759283,-2.425763440856552,-2.426717258089993,-2.426904678613234,-2.427009407935756,-2.427008322147568,-2.426984415320106,-2.426963090401514,-2.426944494345667,-2.426940354961367,-2.427364488483744,-2.426374478358365,-2.426123612461005],"lat":[52.78201848515329,52.78194773552089,52.78174705659156,52.78167321410244,52.78168684407336,52.78112858429428,52.78116424824546,52.78118417680387,52.78118487740797,52.78120314758169,52.78122255732062,52.78124297305095,52.78124856957597,52.78157185455241,52.78216894250524,52.78201848515329]}]],[[{"lng":[-2.422016462172091,-2.422020424148809,-2.422021982947262,-2.421160216278255,-2.420369239192981,-2.419463971810354,-2.419785089115638,-2.420179046129796,-2.420786735987425,-2.42234126625543,-2.423308773009687,-2.42296106102741,-2.42265681537071,-2.422098417664745,-2.422016462172091],"lat":[52.78251256073573,52.78249514644338,52.78247759237127,52.78222863195099,52.78173557429223,52.78116353155542,52.78039469285265,52.78015431811932,52.78006131567533,52.78089820136089,52.78147754500364,52.78174766353025,52.78254090849135,52.78249967377344,52.78251256073573]}]],[[{"lng":[-2.431862885762488,-2.433277847195339,-2.43498251454653,-2.436326547069991,-2.434408717405962,-2.433962907753153,-2.433427036173697,-2.431779895975025,-2.431862885762488],"lat":[52.77749824447991,52.77728881193813,52.77729114806124,52.7784130127348,52.7791911792399,52.77951661583354,52.77908968330232,52.77759856916173,52.77749824447991]}]],[[{"lng":[-2.418588705618156,-2.417316205874618,-2.417081329848843,-2.417249157658527,-2.417260334391832,-2.418588705618156],"lat":[52.77963936142736,52.78029159575561,52.7793351045947,52.77906644446373,52.77921472036794,52.77963936142736]}]],[[{"lng":[-2.418588705618156,-2.417260334391832,-2.417249157658527,-2.417225702706521,-2.417401812144697,-2.417887780543183,-2.418518032967071,-2.420567042791791,-2.420075915417812,-2.420075209323624,-2.419658896773673,-2.419857337543064,-2.419839873769869,-2.419804762217731,-2.419775827755022,-2.419774125763551,-2.418588705618156],"lat":[52.77963936142736,52.77921472036794,52.77906644446373,52.77875530375493,52.77864947460679,52.7783574368912,52.77831682870231,52.77851076572738,52.77922813985331,52.77922917256047,52.77983724716954,52.77996530225791,52.77997904171243,52.78000173251935,52.78001712799594,52.78001789274169,52.77963936142736]}]],[[{"lng":[-2.424778450908669,-2.425498178198704,-2.425750373596258,-2.426856607251175,-2.427262534792642,-2.427269927325224,-2.427836321091883,-2.428285800398676,-2.427315157739295,-2.427167885393768,-2.42491131947348,-2.424778450908669],"lat":[52.78350150345257,52.78245865117201,52.78226424387223,52.78276795443752,52.78261528815553,52.78261939492342,52.78293405692853,52.78344984038339,52.78369173340834,52.78372843348948,52.78397549642794,52.78350150345257]}]],[[{"lng":[-2.418397026633006,-2.417197479200585,-2.41730091682527,-2.417274176277056,-2.416201378925648,-2.417321384762745,-2.417331234461415,-2.418013156480994,-2.418607859033015,-2.419212964317903,-2.418397026633006],"lat":[52.78298570376101,52.78320020743359,52.78335713648175,52.7833607329124,52.78272197876753,52.78244890773998,52.78244650612621,52.78228023811223,52.78236127574309,52.78276780356397,52.78298570376101]}]],[[{"lng":[-2.427493364260303,-2.427691411825397,-2.427515083480962,-2.427540311136142,-2.428062393874104,-2.427898823481407,-2.429006454752039,-2.428361042033832,-2.428031193021237,-2.427493364260303],"lat":[52.77913226187414,52.77810899598732,52.77807739342821,52.77804510273792,52.77803054125111,52.7780865451117,52.778915808732,52.77925417199918,52.77898306904757,52.77913226187414]}]],[[{"lng":[-2.429271353194516,-2.428968851543197,-2.429551034452061,-2.430600980271248,-2.430056104803991,-2.429271353194516],"lat":[52.78136485497048,52.78106732974644,52.78071282956124,52.78102851087336,52.78172661760433,52.78136485497048]}]],[[{"lng":[-2.428396317458201,-2.427514628839262,-2.427009407935756,-2.426904678613234,-2.426717258089993,-2.426907811048723,-2.426226777209291,-2.42628789092478,-2.426267762270275,-2.426267650228493,-2.426303115665017,-2.426557890503373,-2.42548597367384,-2.425325560995352,-2.42604331968886,-2.426538504956662,-2.428396317458201],"lat":[52.78078018984012,52.78128031038647,52.78118417680387,52.78116424824546,52.78112858429428,52.78101705262456,52.78062827653985,52.78053109900632,52.78051121722631,52.78051113043188,52.78050689021505,52.78036171398585,52.7797041126716,52.77953905267712,52.77922881625287,52.77942926722405,52.78078018984012]}]],[[{"lng":[-2.437854186188681,-2.437719270073594,-2.43614524483516,-2.434172655673664,-2.43272939498281,-2.432422740864772,-2.433005489830642,-2.432798483168656,-2.433427036173697,-2.433962907753153,-2.434408717405962,-2.436326547069991,-2.437670838466386,-2.437854186188681],"lat":[52.77964777290246,52.77981007335438,52.78045871701244,52.78115158989173,52.78007766768673,52.77975695976667,52.77957495204251,52.77931096942348,52.77908968330232,52.77951661583354,52.7791911792399,52.7784130127348,52.77949157904125,52.77964777290246]}]],[[{"lng":[-2.433222929676958,-2.432943425410085,-2.432921101445082,-2.432368292109604,-2.43144660034185,-2.431351819955757,-2.43221993610635,-2.432630237315555,-2.433869716143247,-2.434135099825657,-2.434222498917564,-2.435959621646794,-2.435678927261686,-2.434362221380048,-2.433222929676958],"lat":[52.78428861410452,52.78417902906705,52.78417027652331,52.7835202803603,52.78271190934198,52.78262878064484,52.78219128357394,52.78188789894342,52.7813102857416,52.7813134838551,52.78131453656829,52.78276235577767,52.78306407930035,52.78379499644218,52.78428861410452]}]],[[{"lng":[-2.423637296161302,-2.42387696471446,-2.422949992534922,-2.422817734969311,-2.422716160988547,-2.423339627000409,-2.423635424476808,-2.424740871996419,-2.424986709502422,-2.425046699745135,-2.425039392983062,-2.425014066999219,-2.424976784004874,-2.424946854380261,-2.424250275072089,-2.423650138190075,-2.423637296161302],"lat":[52.77823616562483,52.77809921428122,52.77699190431177,52.77699355810547,52.77671632592192,52.77657234159366,52.77675155215285,52.77815284720938,52.77826274844851,52.77843604738427,52.7784421658053,52.77845956239638,52.77848067497497,52.77849421624472,52.77823910538581,52.77823549766686,52.77823616562483]}]],[[{"lng":[-2.431803886240958,-2.430792013165761,-2.431862885762488,-2.431779895975025,-2.433427036173697,-2.432798483168656,-2.43209311980984,-2.431803886240958],"lat":[52.77877042426604,52.77773119933125,52.77749824447991,52.77759856916173,52.77908968330232,52.77931096942348,52.77906299792382,52.77877042426604]}]],[[{"lng":[-2.416201378925648,-2.415217906154328,-2.413704299898464,-2.413532790676253,-2.413630289298916,-2.413975289252374,-2.416028330980124,-2.417026585505075,-2.417818365840795,-2.417987913764687,-2.418013156480994,-2.417331234461415,-2.417321384762745,-2.416201378925648],"lat":[52.78272197876753,52.78296175021938,52.78333074796173,52.7833036358655,52.78328102419871,52.78140639626128,52.781745668973,52.78238437677513,52.78203576130496,52.78204333800831,52.78228023811223,52.78244650612621,52.78244890773998,52.78272197876753]}]],[[{"lng":[-2.421604258386728,-2.422310763231426,-2.422100872372714,-2.42265404062866,-2.422653892182552,-2.422653693456936,-2.42265507581175,-2.423637296161302,-2.423650138190075,-2.42347472255276,-2.424343301981638,-2.4238739638138,-2.42306824467998,-2.423065203225001,-2.423017706882202,-2.423179260214842,-2.421767039354592,-2.421609057398766,-2.421608096931162,-2.421604258386728],"lat":[52.77930753240834,52.77875248639499,52.77859158511046,52.7782878242032,52.77828749840936,52.77828718448416,52.77828725596929,52.77823616562483,52.77823549766686,52.77870457060374,52.7789586436205,52.77922477548638,52.77993656547301,52.77993633000973,52.77992891675205,52.77980823614589,52.77920631625668,52.77931306819732,52.77931216816416,52.77930753240834]}]],[[{"lng":[-2.437671587983002,-2.435179814945317,-2.435098597441882,-2.435078323754306,-2.434318723331777,-2.434138678623332,-2.433984557953818,-2.434069288621561,-2.435780179981388,-2.436750914418519,-2.437021211349985,-2.437206294418588,-2.437873056073951,-2.438070618933483,-2.438078976946039,-2.438051774745688,-2.438017536508867,-2.437974321443161,-2.437944400129655,-2.43875481955935,-2.43901245985358,-2.439011762154355,-2.439010611882174,-2.439009910252167,-2.437671587983002],"lat":[52.77687138736403,52.77720087183217,52.77721160945092,52.77719393212718,52.77653157095063,52.77635285139196,52.77620421109005,52.77607016395706,52.77527541312394,52.7746767316991,52.77496077106246,52.77491870707738,52.77476716636988,52.77490440421604,52.77491021027222,52.77491660077531,52.77492704638468,52.77494357512916,52.77495804109619,52.77661395922495,52.77660059016574,52.77661227380165,52.77662126403909,52.77662445883624,52.77687138736403]}]],[[{"lng":[-2.42604331968886,-2.425325560995352,-2.424717926944439,-2.424332387761898,-2.4238739638138,-2.424343301981638,-2.42347472255276,-2.423650138190075,-2.424250275072089,-2.424946854380261,-2.425084255849574,-2.426028253424953,-2.42604331968886],"lat":[52.77922881625287,52.77953905267712,52.77931294319765,52.77953232041349,52.77922477548638,52.7789586436205,52.77870457060374,52.77823549766686,52.77823910538581,52.77849421624472,52.77854453730639,52.77906165004779,52.77922881625287]}]],[[{"lng":[-2.434877557448953,-2.435780179981388,-2.434069288621561,-2.433984557953818,-2.434138678623332,-2.434318723331777,-2.435078323754306,-2.435098597441882,-2.43498251454653,-2.433277847195339,-2.431862885762488,-2.430792013165761,-2.428842611201679,-2.428660430122572,-2.428162069752784,-2.42722834240376,-2.428530048339634,-2.433387112614275,-2.433826926937587,-2.434877557448953],"lat":[52.77467975135037,52.77527541312394,52.77607016395706,52.77620421109005,52.77635285139196,52.77653157095063,52.77719393212718,52.77721160945092,52.77729114806124,52.77728881193813,52.77749824447991,52.77773119933125,52.7778942360882,52.77787409023188,52.77692704152297,52.7756446020231,52.77531720802136,52.7738944848689,52.77456610602793,52.77467975135037]}]],[[{"lng":[-2.427167885393768,-2.427315157739295,-2.428285800398676,-2.427836321091883,-2.427269927325224,-2.429181975659263,-2.429067448616302,-2.429271353194516,-2.430056104803991,-2.431211117557061,-2.431351819955757,-2.43144660034185,-2.432368292109604,-2.432921101445082,-2.431882504023352,-2.431843643118213,-2.429814131970033,-2.429768186845361,-2.428416666857945,-2.427029227496547,-2.42704155897446,-2.427078157124329,-2.42707864953448,-2.427112653145288,-2.427306943816637,-2.42731297203327,-2.427175795452958,-2.427167885393768],"lat":[52.78372843348948,52.78369173340834,52.78344984038339,52.78293405692853,52.78261939492342,52.78163106014047,52.78148606836671,52.78136485497048,52.78172661760433,52.78253081617581,52.78262878064484,52.78271190934198,52.7835202803603,52.78417027652331,52.7844223515549,52.78443178288616,52.78466238924255,52.78466722943161,52.78480961135619,52.78469364121205,52.78463778962083,52.78451167993452,52.78450988025099,52.78439197837493,52.78381591782889,52.7837980428392,52.78373222825758,52.78372843348948]}]],[[{"lng":[-2.414333904276609,-2.413404734060833,-2.414400457512231,-2.415098204952486,-2.415442707527176,-2.416800446602679,-2.417264499911122,-2.417319654398952,-2.417024944881763,-2.415606497492873,-2.415575197133902,-2.414333904276609],"lat":[52.77478954282957,52.77448875868826,52.77347314350899,52.77376196866603,52.77333248362766,52.77389441519226,52.77472703695969,52.77515806269842,52.77567051978539,52.77533372271368,52.77506693207776,52.77478954282957]}]],[[{"lng":[-2.424778450908669,-2.42265681537071,-2.42296106102741,-2.423308773009687,-2.424963013094179,-2.425498178198704,-2.424778450908669],"lat":[52.78350150345257,52.78254090849135,52.78174766353025,52.78147754500364,52.78229713994163,52.78245865117201,52.78350150345257]}]],[[{"lng":[-2.443315519008638,-2.443123447547746,-2.442785766063465,-2.438751232166203,-2.437421315001369,-2.436044595002602,-2.43702793739496,-2.439570110841802,-2.439666170652934,-2.439929770565215,-2.439995779953336,-2.440105130733766,-2.440480351279045,-2.44084831066091,-2.440849379751504,-2.440856671703085,-2.440863856645956,-2.440870930131682,-2.44087788620209,-2.440884718917166,-2.440891422309623,-2.44089799339236,-2.440904427716878,-2.440910716337768,-2.440916859253095,-2.440922005048593,-2.440801115840253,-2.441844454079651,-2.442300910362168,-2.443148557130888,-2.443315519008638],"lat":[52.7833252390853,52.78367079939293,52.78369192762887,52.78340289584995,52.78330065314308,52.78277273195854,52.78211404250973,52.78113445475117,52.78109476208833,52.78099193267248,52.7809660675037,52.78091585951371,52.78076766671605,52.78061843984427,52.78061875050776,52.78062102742599,52.78062342520254,52.78062594295375,52.78062857800558,52.78063132947997,52.78063419380267,52.78063716919304,52.78064025476316,52.78064344604974,52.78064674216119,52.78064966171893,52.78068844536186,52.78178261507012,52.78226128995217,52.78315016202677,52.7833252390853]}]],[[{"lng":[-2.428530048339634,-2.42810828257287,-2.427586003170438,-2.427563647604187,-2.432458932380823,-2.432685331329355,-2.433387112614275,-2.428530048339634],"lat":[52.77531720802136,52.77480048253207,52.77416060124244,52.77413317375361,52.77268841576344,52.77272222489747,52.7738944848689,52.77531720802136]}]],[[{"lng":[-2.419212964317903,-2.418607859033015,-2.418797748039324,-2.4193771763803,-2.420369239192981,-2.421160216278255,-2.422021982947262,-2.422020424148809,-2.422016462172091,-2.419344723920651,-2.419212964317903],"lat":[52.78276780356397,52.78236127574309,52.7821417993763,52.7821910820278,52.78173557429223,52.78222863195099,52.78247759237127,52.78249514644338,52.78251256073573,52.78293265571265,52.78276780356397]}]],[[{"lng":[-2.430088327667879,-2.429804019385003,-2.430197229580382,-2.429551034452061,-2.428968851543197,-2.428396317458201,-2.426538504956662,-2.427493364260303,-2.428031193021237,-2.428361042033832,-2.429006454752039,-2.429595515717017,-2.429215752713236,-2.430088327667879],"lat":[52.77973767157496,52.78002685847449,52.78030286057568,52.78071282956124,52.78106732974644,52.78078018984012,52.77942926722405,52.77913226187414,52.77898306904757,52.77925417199918,52.778915808732,52.77935910929869,52.77956041245799,52.77973767157496]}]],[[{"lng":[-2.416364914951734,-2.416316643950414,-2.416259967230574,-2.416207876845931,-2.416198378753551,-2.41642822873687,-2.414360918018732,-2.414335591185894,-2.414334211794305,-2.414333721724972,-2.414337049222487,-2.414346371979033,-2.414356965330269,-2.414375754367966,-2.414399661061144,-2.41440662412238,-2.416684016500452,-2.417552517551067,-2.417363561330903,-2.417011366370841,-2.416364914951734],"lat":[52.77877695569089,52.77876656603238,52.77874871485184,52.7787263069194,52.77872088808406,52.77827339501533,52.77800690470556,52.77797330480802,52.77796636608825,52.77793538526434,52.77791223179605,52.77788176954263,52.77785943390644,52.77783062231475,52.77780324195373,52.77779684581682,52.77801620393632,52.77805589876795,52.7784160845977,52.77832230847002,52.77877695569089]}]],[[{"lng":[-2.417461878208267,-2.41701676881495,-2.416684016500452,-2.41440662412238,-2.414186608166065,-2.413310363104901,-2.413245500221127,-2.412796244626342,-2.412609357015149,-2.41304918200681,-2.41348825865705,-2.414333904276609,-2.415575197133902,-2.415606497492873,-2.417024944881763,-2.4174235929221,-2.417461878208267],"lat":[52.77654690995965,52.77653741899146,52.77801620393632,52.77779684581682,52.77777565211017,52.77761370245143,52.777191667919,52.77718325431123,52.77663985618225,52.77648271551431,52.7757154538184,52.77478954282957,52.77506693207776,52.77533372271368,52.77567051978539,52.77581543853407,52.77654690995965]}]],[[{"lng":[-2.427540311136142,-2.427224222803691,-2.428162069752784,-2.428660430122572,-2.428842611201679,-2.428062393874104,-2.427540311136142],"lat":[52.77804510273792,52.77708657298032,52.77692704152297,52.77787409023188,52.7778942360882,52.77803054125111,52.77804510273792]}]],[[{"lng":[-2.430197229580382,-2.430549317025665,-2.431219369320253,-2.430764832838887,-2.43221993610635,-2.431351819955757,-2.431211117557061,-2.430056104803991,-2.430600980271248,-2.429551034452061,-2.430197229580382],"lat":[52.78030286057568,52.7800929834518,52.78044418936389,52.78104336885072,52.78219128357394,52.78262878064484,52.78253081617581,52.78172661760433,52.78102851087336,52.78071282956124,52.78030286057568]}]],[[{"lng":[-2.416856054690663,-2.417218676371553,-2.417986068712846,-2.417987913764687,-2.417818365840795,-2.41668864775074,-2.416856054690663],"lat":[52.78131803059651,52.78096883411617,52.78165140595391,52.78204333800831,52.78203576130496,52.78147923724799,52.78131803059651]}]],[[{"lng":[-2.437670838466386,-2.436326547069991,-2.43498251454653,-2.435098597441882,-2.435179814945317,-2.437671587983002,-2.439205577937204,-2.439566465494214,-2.437670838466386],"lat":[52.77949157904125,52.7784130127348,52.77729114806124,52.77721160945092,52.77720087183217,52.77687138736403,52.77834646928989,52.77895481658966,52.77949157904125]}]],[[{"lng":[-2.434222498917564,-2.434135099825657,-2.433869716143247,-2.432630237315555,-2.43221993610635,-2.430764832838887,-2.431219369320253,-2.430549317025665,-2.430858406231991,-2.432374615875261,-2.432292763992816,-2.432422740864772,-2.43272939498281,-2.434172655673664,-2.434212589995991,-2.434222498917564],"lat":[52.78131453656829,52.7813134838551,52.7813102857416,52.78188789894342,52.78219128357394,52.78104336885072,52.78044418936389,52.7800929834518,52.77990873434583,52.77982248940898,52.77973690688062,52.77975695976667,52.78007766768673,52.78115158989173,52.78128214208814,52.78131453656829]}]],[[{"lng":[-2.423339627000409,-2.422716160988547,-2.422090201180886,-2.421549924049594,-2.421550149901369,-2.422456261073356,-2.422458527131494,-2.422458903980923,-2.422460891104505,-2.423002968573357,-2.423339627000409],"lat":[52.77657234159366,52.77671632592192,52.7760823952897,52.77577598573045,52.77577558039615,52.77573653402421,52.77573464622933,52.77573422058141,52.77573597995107,52.77621576080892,52.77657234159366]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":1,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.5,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[52.77089849106513,52.78496684017628],"lng":[-2.443315519008638,-2.412609357015149]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="random-walk-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="random-walk-simulation">Random Walk Simulation</h2>
+<p>Another experiment we can run involves random pathing. If we imagine an animal that is, say, lost or has no clear direction, we can simulate a randomly assigned path. The animal can go left, right, or stay stationary. Another handy thing that R can do is animations; we can create this simulated footpath and then animate it.</p>
+<p>Question: Simulate 100 movements and plot the bird’s position over time</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>steps <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>position <span class="ot">&lt;-</span> <span class="dv">0</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>positions <span class="ot">&lt;-</span> <span class="fu">numeric</span>(steps <span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>positions[<span class="dv">1</span>] <span class="ot">&lt;-</span> position </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>steps){</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  movement <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  position <span class="ot">&lt;-</span> position <span class="sc">+</span> movement</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  positions[i <span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> position</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>positions</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  0  1  2  1  2  1  0  1  0  1  0 -1  0 -1 -2 -1 -2 -3 -4 -3 -4 -3 -2 -3 -2
+ [26] -1 -2 -1 -2 -3 -2 -3 -2 -3 -4 -3 -2 -1 -2 -3 -4 -5 -4 -3 -2 -3 -2 -1  0  1
+ [51]  0  1  0  1  0  1  0 -1  0  1  0  1  0  1  2  3  2  3  4  3  2  3  4  5  4
+ [76]  3  2  3  2  3  2  1  0  1  2  1  0  1  2  3  2  3  4  5  4  5  6  7  6  5
+[101]  6</code></pre>
+</div>
+</div>
+<p>Then we can plot this</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>random_walk <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Step =</span> <span class="dv">0</span><span class="sc">:</span>steps,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Position =</span> positions</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(random_walk,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Step, </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> Position)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>       )<span class="sc">+</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Random walk Simualtion"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Step"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Position"</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Chapter-8_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This, as it is, isn’t very informational, so another cool thing we can do with this kind of continuous data is animate it using the gganimate and gifski packages. You just need to follow the format as shown below. Although we have to create very specific conditions:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of steps</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>steps <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Starting position</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data frame</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>walk <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Step =</span> <span class="dv">0</span><span class="sc">:</span>steps,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">numeric</span>(steps <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> <span class="fu">numeric</span>(steps <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Store starting position</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>walk<span class="sc">$</span>X[<span class="dv">1</span>] <span class="ot">&lt;-</span> x</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>walk<span class="sc">$</span>Y[<span class="dv">1</span>] <span class="ot">&lt;-</span> y</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate movement</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>steps) {</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  direction <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"up"</span>, <span class="st">"down"</span>, <span class="st">"left"</span>, <span class="st">"right"</span>),</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">1</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (direction <span class="sc">==</span> <span class="st">"up"</span>) y <span class="ot">&lt;-</span> y <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (direction <span class="sc">==</span> <span class="st">"down"</span>) y <span class="ot">&lt;-</span> y <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (direction <span class="sc">==</span> <span class="st">"left"</span>) x <span class="ot">&lt;-</span> x <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (direction <span class="sc">==</span> <span class="st">"right"</span>) x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  walk<span class="sc">$</span>X[i <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> x</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  walk<span class="sc">$</span>Y[i <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> y</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gifski)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>random_walk_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  walk,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">15</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"grey85"</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">15</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"grey85"</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="dv">15</span>),</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="dv">15</span>)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Animal Random Walk"</span>,</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Step: {frame_along}"</span>,</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"X position"</span>,</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Y position"</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_reveal</span>(Step)</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>random_walk_anim <span class="ot">&lt;-</span> <span class="fu">animate</span>(</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  random_walk_plot,</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">nframes =</span> steps <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">fps =</span> <span class="dv">10</span>,</span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">600</span>,</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">600</span>,</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">units =</span> <span class="st">"px"</span>,</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">res =</span> <span class="dv">96</span>,</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">renderer =</span> <span class="fu">gifski_renderer</span>()</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_path()`: Each group consists of only one observation.
+ℹ Do you need to adjust the group aesthetic?
+`geom_path()`: Each group consists of only one observation.
+ℹ Do you need to adjust the group aesthetic?</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anim_save</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Rwalk.gif"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">animation =</span> random_walk_anim</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Rwalk.gif" class="img-fluid figure-img"></p>
+<figcaption>Random walk simualtion animation</figcaption>
+</figure>
+</div>
+</section>
+<section id="population-changes" class="level2">
+<h2 class="anchored" data-anchor-id="population-changes">Population changes</h2>
+<p>To simulate population changes over time, we can use the population expectancy equation, which proposes:</p>
+<p>Nt+1 = Nt + (births−deaths)</p>
+<p>Where we note that:</p>
+<ul>
+<li><p>births = Nt × birth rate</p></li>
+<li><p>deaths = Nt × death rate</p></li>
+</ul>
+<p>First, we can set the population size and the rates of birth and death so that we have integer-assigned variables that we can simulate:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>population <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>birth_rate <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>death_rate <span class="ot">&lt;-</span> <span class="fl">0.7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then we want to create a vector that can automatically store the population per year. So, as we go up a year, it stores Vector Value 1; then next year, it stores vector value 2, and so on.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>population_size<span class="ot">&lt;-</span> <span class="fu">numeric</span>(years <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>population_size<span class="ot">&lt;-</span> population</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now that we have all our variables assigned, we can start to calculate yearly population changes. The following code follows that initial equation that was stated, where the ‘for(i)’ translates the yearly change into a new vector value.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>years){</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  births <span class="ot">&lt;-</span> population<span class="sc">*</span>birth_rate</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  deaths <span class="ot">&lt;-</span> population<span class="sc">*</span>death_rate</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  population <span class="ot">&lt;-</span> population <span class="sc">+</span> births <span class="sc">-</span> deaths</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  population_size[i<span class="sc">+</span><span class="dv">1</span>]<span class="ot">&lt;-</span> population</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>population_size</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.000000e+02 6.000000e+01 3.600000e+01 2.160000e+01 1.296000e+01
+ [6] 7.776000e+00 4.665600e+00 2.799360e+00 1.679616e+00 1.007770e+00
+[11] 6.046618e-01 3.627971e-01 2.176782e-01 1.306069e-01 7.836416e-02
+[16] 4.701850e-02 2.821110e-02 1.692666e-02 1.015600e-02 6.093597e-03
+[21] 3.656158e-03</code></pre>
+</div>
+</div>
+<p>Then to visualise the new data:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>population_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> <span class="dv">0</span><span class="sc">:</span>years,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Population =</span> population_size</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(population_data,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y=</span> Population)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>       )<span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Population Change"</span>,</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">"Year"</span>,</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span> <span class="st">"Population size"</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Chapter-8_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we can see, the results of this are related to our death rate; with a death rate more than double our birth rate, the population crashes, and if we alter the values, it may look like this:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>birth_rate <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>death_rate <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>population_size<span class="ot">&lt;-</span> <span class="fu">numeric</span>(years <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>population_size<span class="ot">&lt;-</span> population</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>years){</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  births <span class="ot">&lt;-</span> population<span class="sc">*</span>birth_rate</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  deaths <span class="ot">&lt;-</span> population<span class="sc">*</span>death_rate</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  population <span class="ot">&lt;-</span> population <span class="sc">+</span> births <span class="sc">-</span> deaths</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  population_size[i<span class="sc">+</span><span class="dv">1</span>]<span class="ot">&lt;-</span> population</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>population_size</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.003656158 0.003656158 0.003656158 0.003656158 0.003656158 0.003656158
+ [7] 0.003656158 0.003656158 0.003656158 0.003656158 0.003656158</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>population_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> <span class="dv">0</span><span class="sc">:</span>years,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Population =</span> population_size</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(population_data,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y=</span> Population)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>       )<span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Population Change"</span>,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="st">"Year"</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span> <span class="st">"Population size"</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Chapter-8_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Another cool thing we can do with this kind of continuous data is animate it using the gganimate and gifski packages. Just follow the format shown below.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|include: false </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>population <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>birth_rate <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>death_rate <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>population_size<span class="ot">&lt;-</span> <span class="fu">numeric</span>(years <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>population_size<span class="ot">&lt;-</span> population</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>years){</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  births <span class="ot">&lt;-</span> population<span class="sc">*</span>birth_rate</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  deaths <span class="ot">&lt;-</span> population<span class="sc">*</span>death_rate</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  population <span class="ot">&lt;-</span> population <span class="sc">+</span> births <span class="sc">-</span> deaths</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  population_size[i<span class="sc">+</span><span class="dv">1</span>]<span class="ot">&lt;-</span> population</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>population_size</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.000000e+02 6.000000e+01 3.600000e+01 2.160000e+01 1.296000e+01
+ [6] 7.776000e+00 4.665600e+00 2.799360e+00 1.679616e+00 1.007770e+00
+[11] 6.046618e-01 3.627971e-01 2.176782e-01 1.306069e-01 7.836416e-02
+[16] 4.701850e-02 2.821110e-02 1.692666e-02 1.015600e-02 6.093597e-03
+[21] 3.656158e-03</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gifski)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gifski)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>population_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  population_data,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Population)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Population Growth"</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Year: {frame_along}"</span>,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Population size"</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_reveal</span>(Year)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>anim <span class="ot">&lt;-</span> <span class="fu">animate</span>(</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  population_plot,</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">nframes =</span> <span class="dv">100</span>,</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">fps =</span> <span class="dv">10</span>,</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">700</span>,</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">450</span>,</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">units =</span> <span class="st">"px"</span>,</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">res =</span> <span class="dv">96</span>,</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">renderer =</span> <span class="fu">gifski_renderer</span>()</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_line()`: Each group consists of only one observation.
+ℹ Do you need to adjust the group aesthetic?
+`geom_line()`: Each group consists of only one observation.
+ℹ Do you need to adjust the group aesthetic?</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anim_save</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"population.gif"</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">animation =</span> anim</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="population.gif" class="img-fluid figure-img"></p>
+<figcaption>Population growth animation</figcaption>
+</figure>
+</div>
+</section>
+<section id="this-guide" class="level2">
+<h2 class="anchored" data-anchor-id="this-guide">This Guide!!</h2>
+<p>This guide uses HTML to create a web-based document, also called Markdown. This is just one way of making them; you can find other resources that produce the exact same product. Essentially, the end product is a fully customisable work/note-taking document.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Required packages
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Quarto Packages<br>
+(These are externally downloaded and attached to Rstudio, will need to visit their official page)</li>
+</ul>
+</div>
+</div>
+</div>
+<p>The first step is the exact same as opening a normal RStudio session, but you want to click ‘Quarto Project’:</p>
+<p><img src="images/quartoimage.png" class="img-fluid"></p>
+<p>Second, you will see 3 tabs open at the top of your active console :</p>
+<ul>
+<li>‘Styles.scss’ - Uses HTML code to give you styles and different visualisations to the markdown</li>
+<li>‘_quarto.yml’ - The organisation of the markdown; controls the table of contents</li>
+<li>‘Intro’ or ‘Untitled1.qmd’ - This is the actual page you work on</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Styles
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>You can alter this section to change how your file will look; you simply need to add the section and colour change into curly brackets:</p>
+<p>“body { background-color: #202124; color: #f5f5f5; }”</p>
+<p>This will essentially be a dark mode</p>
+<p>The following lines will change the inline code colour:</p>
+<p>“code { color: #6ee7ff; }”</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quarto yml
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>The only two section you will need to change in this section are as follows:</p>
+<p>chapters: - index.qmd - Chapter 1.qmd</p>
+<p>This is the section that processes pages, you must save the pages as qmd documents and then add the to this section in the order you would like them to appear in the booklet.</p>
+<p>format: html: theme: darkly css: styles.scss toc: true toc-depth: 6</p>
+<p>This section will be themes, how you book looks. Unlike the styles section which is more detailed, this will more broadly control styles. Such as designating the page to use for css (detailed styles), adding a table of contents (toc = true), then you can control the depth of the table of contents toc-depth: X.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>R code chunks
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>When you are writing in an R quarto document, if everything you types picked up as a line of code then you would be getting a million different errors and warnings. so the way its formatted makes it so that anything you types, such as this sentence here is just normal text, similar to a book. Whereas when you designate a code chunk you tell R to run that section as normal code. They are designated by three ``` followed by ‘{r}’. then after your final line of code, close the chunk by adding three more apostrophes.</p>
+<p>You can also style these chunks to show what shows in your book, throughout this book i have kept it so that everything is run and visible but you may want it otherwise:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>echo: false`</td>
+<td>Hides the R code</td>
+</tr>
+<tr class="even">
+<td>eval: false</td>
+<td>Displays code without running it</td>
+</tr>
+<tr class="odd">
+<td>include: false</td>
+<td>Runs code but hides code and output</td>
+</tr>
+<tr class="even">
+<td>warning: false</td>
+<td>Hides warnings</td>
+</tr>
+<tr class="odd">
+<td>message: false</td>
+<td>Hides messages</td>
+</tr>
+<tr class="even">
+<td>results: hide</td>
+<td>Hides printed results</td>
+</tr>
+<tr class="odd">
+<td>output: false</td>
+<td>Hides standard output</td>
+</tr>
+<tr class="even">
+<td>label: fig-example</td>
+<td>Labels a code chunk for referencing</td>
+</tr>
+<tr class="odd">
+<td>fig-cap: “Caption”</td>
+<td>Adds a figure caption</td>
+</tr>
+<tr class="even">
+<td>fig-width: 7</td>
+<td>Sets figure width in inches</td>
+</tr>
+<tr class="odd">
+<td>fig-height: 5</td>
+<td>Sets figure height in inches</td>
+</tr>
+<tr class="even">
+<td>out-width: “80%”</td>
+<td>Sets displayed figure width</td>
+</tr>
+<tr class="odd">
+<td>code-fold: true</td>
+<td>Makes code collapsible</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Callouts
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Callouts create coloured information boxes; these are useful for explanations, reminders, and warnings in your book. The format for these is as follows:</p>
+<p>Three ::: then {. callout-note}, making sure to close again with another three :::. You can also make it so that your callout box closes by adding “collapse=”true” to the end.</p>
+<p>There are multiple types of callout notes you can do:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Callout type</th>
+<th>Syntax</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Note</td>
+<td>.callout-note</td>
+<td>General information</td>
+</tr>
+<tr class="even">
+<td>Tip</td>
+<td>.callout-tip</td>
+<td>Helpful advice</td>
+</tr>
+<tr class="odd">
+<td>Important</td>
+<td>.callout-important</td>
+<td>Highlight key concepts</td>
+</tr>
+<tr class="even">
+<td>Warning</td>
+<td>.callout-warning</td>
+<td>Highlight potential mistakes or problems</td>
+</tr>
+<tr class="odd">
+<td>Caution</td>
+<td>.callout-caution</td>
+<td>Draw attention to things to be careful about</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>These are all the steps you need in order to build any guide or information storage you want using R!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Chapter 7.html" class="pagination-link" aria-label="Chapter 7 - Practice Activities">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Chapter 7 - Practice Activities</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
